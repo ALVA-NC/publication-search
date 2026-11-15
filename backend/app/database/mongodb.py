@@ -12,11 +12,5 @@ publications: Collection = database[
     settings.mongodb_collection
 ]
 
-
-def create_indexes() -> None:
-    """ MongoDB automatically creates a unique index on _id"""
-    pass
-
-
 def close_connection() -> None:
     client.close()

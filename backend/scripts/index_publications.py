@@ -6,9 +6,7 @@ from elasticsearch.helpers import bulk
 
 from app.config import settings
 from app.database.mongodb import publications, close_connection
-
-
-INDEX_NAME = "publications"
+from app.database.elasticsearch import es, INDEX_NAME
 
 logging.basicConfig(
     level=logging.INFO,
@@ -158,7 +156,6 @@ def prepare_document(publication: dict) -> dict:
 
 
 def index_publications() -> None:
-    es = Elasticsearch(settings.elasticsearch_url)
 
     try:
         if not es.ping():

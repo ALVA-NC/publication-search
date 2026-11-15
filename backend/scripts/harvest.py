@@ -8,7 +8,6 @@ from pymongo import ReplaceOne
 from app.config import settings
 from app.database.mongodb import (
     publications,
-    create_indexes,
     close_connection,
 )
 
@@ -96,9 +95,6 @@ def save_publications(works: list[dict]) -> int:
 
 def harvest() -> None:
     """Retrieve and store up to MAX_RECORDS publications."""
-
-    create_indexes()
-
     page = 1
     total_fetched = 0
 
