@@ -55,8 +55,7 @@ def fetch_page(
 
 
 def save_publications(works: list[dict]) -> int:
-    """Upsert publications into MongoDB."""
-
+    
     if not works:
         return 0
 
@@ -70,15 +69,15 @@ def save_publications(works: list[dict]) -> int:
             continue
 
         document = {
-            **work,
-            "_id": work_id,
+            **work, # Unpacks a dictionary copying key/value pairs into a new one
+            "_id": work_id, # adds another field called _id
         }
 
         operations.append(
             ReplaceOne(
                 {"_id": work_id},
                 document,
-                upsert=True
+                upsert=True # Updated if a document exists, otherwise insert it
             )
         )
 
@@ -94,7 +93,6 @@ def save_publications(works: list[dict]) -> int:
 
 
 def harvest() -> None:
-    """Retrieve and store up to MAX_RECORDS publications."""
     page = 1
     total_fetched = 0
 
